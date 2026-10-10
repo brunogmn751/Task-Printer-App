@@ -1,0 +1,234 @@
+:root {
+  --amarelo-claro: #fff8ec;
+  --amarelo-medio: #dcccac;
+  --laranja-medio: #d97a2b;
+  --vermelho-escuro: #c44a3a;
+}
+
+@font-face {
+  font-family: Pixel;
+  src: url("./assets/font/PressStart2P-Regular.ttf");
+}
+
+@font-face {
+  font-family: Retro;
+  src: url("./assets/font/retro.ttf");
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  flex-flow: column;
+  background-color: var(--amarelo-claro);
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.opacity-filter {
+  filter: opacity(0.5);
+}
+
+.ticket-creator {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 4rem;
+
+  & .creator--header {
+    font-size: 4rem;
+    font-family: Retro;
+    color: #000;
+    text-align: center;
+    margin-bottom: -1rem;
+  }
+
+  & #creator--form {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 3rem;
+
+    & #task-input {
+      padding: 1rem 0.5rem;
+      border: solid 2px #000;
+      font-family: pixel;
+      word-spacing: -0.5rem;
+      border-radius: 1rem;
+      caret-color: #000;
+      text-align: center;
+
+      &::placeholder {
+        color: #0000003f;
+      }
+
+      &:focus {
+        outline: none;
+        border: dashed 2px #000;
+      }
+    }
+
+    .creator--scale-div {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      gap: 1rem;
+
+      & p {
+        font-family: pixel;
+        text-align: center;
+        line-height: 1.5;
+        word-spacing: -0.3rem;
+      }
+
+      & input {
+        display: none;
+        filter: opacity(0.4);
+        width: 1rem;
+      }
+
+      & .urgency-scale-input {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      & img {
+        width: 5rem;
+        border-radius: 25%;
+        cursor: pointer;
+      }
+    }
+
+    & #previewBtn {
+      padding: 1rem;
+      font-family: Retro;
+      word-spacing: -0.5rem;
+      background-color: var(--amarelo-medio);
+      cursor: pointer;
+      transition:
+        background-color ease-in 0.2s,
+        color ease-in 0.2s;
+
+      &:hover {
+        background-color: var(--vermelho-escuro);
+        color: white;
+      }
+    }
+  }
+}
+
+.preview-box {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+  border: dashed var(--amarelo-medio);
+
+  & .ticket-preview {
+    width: 384px;
+    background-color: white;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 0rem;
+
+    & .task-header {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+
+      & .decoration {
+        font-size: 1rem;
+        font-family: retro;
+      }
+
+      & .ticket-logo {
+        font-size: 2rem;
+        font-family: retro;
+        margin: -0.5rem 0 0 0;
+      }
+    }
+
+    & .task-text {
+      width: 384px;
+      font-family: pixel;
+      text-align: center;
+      word-spacing: -.75rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+      max-width: 384px;
+      /* white-space: nowrap; */
+      overflow: hidden;
+      display: block;
+    }
+
+    & hr {
+      width: 50%;
+      border: dashed 2px black;
+    }
+
+    & .psyduck-urgency-scale {
+      width: 100%;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      padding: 2rem 0;
+
+      & img {
+        width: 15%;
+        max-width: 30%;
+      }
+    }
+
+    & .qrCode {
+      width: 30%;
+    }
+  }
+
+  & #printBtn {
+    padding: 1rem;
+    font-family: Retro;
+    word-spacing: -0.5rem;
+    background-color: var(--amarelo-medio);
+    cursor: pointer;
+    transition:
+      background-color ease-in 0.2s,
+      color ease-in 0.2s;
+
+    &:hover {
+      background-color: var(--vermelho-escuro);
+      color: white;
+    }
+  }
+}
+
+.no-show {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--amarelo-medio);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  min-height: 40px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--vermelho-escuro);
+}

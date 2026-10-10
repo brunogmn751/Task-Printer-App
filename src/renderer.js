@@ -8,9 +8,9 @@ const psyduckImgList = document.querySelectorAll(".urgency-scale-input img");
 const previewBox = document.querySelector(".preview-box");
 const taskText = document.querySelector(".task-text");
 const taskScaleDiv = document.querySelector(".psyduck-urgency-scale");
+const errorMsg = document.querySelector("#error");
 
 taskInput.setAttribute("size", taskInput.getAttribute("placeholder").length);
-
 
 psyduckScale.forEach((input) => {
   input.addEventListener("change", () => {
@@ -35,6 +35,14 @@ function createTicket() {
   const psyduckScaleChecked = document.querySelector(
     "input[name='stressed-psy-scale']:checked",
   );
+  let psyduckNumber;
+
+  if (!psyduckScaleChecked) {
+    psyduckNumber = 1;
+  } else {
+    psyduckNumber = psyduckScaleChecked.value;
+  }
+
   taskText.textContent = textInputContent;
   requestAnimationFrame(() => {
     let fontSize = 48;
@@ -50,7 +58,7 @@ function createTicket() {
     }
   });
   taskScaleDiv.replaceChildren();
-  for (let i = 0; i < psyduckScaleChecked.value; i++) {
+  for (let i = 0; i < psyduckNumber; i++) {
     const psyduckImg = document.createElement("img");
     psyduckImg.src = "./assets/image/Psyduck.png";
     taskScaleDiv.appendChild(psyduckImg);
@@ -66,6 +74,9 @@ function createTicket() {
 previewBtn.addEventListener("click", (event) => {
   event.preventDefault();
   if (taskInput.value) {
+    errorMsg.classList.add("full-opacity");
     createTicket();
+  } else {
+    errorMsg.classList.remove("full-opacity");
   }
 });

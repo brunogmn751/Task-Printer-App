@@ -10,49 +10,86 @@
     <section class="ticket-creator">
       <h1 class="creator--header">Ticket Printer</h1>
       <form id="creator--form">
-        
-        <input id="task-input" type="text" placeholder="What are we doing today?">
+        <div class="task-input-div">
+          <input
+            id="task-input"
+            type="text"
+            placeholder="What are we doing today?"
+          />
+          <span id="error" class="full-opacity">Please insert a task before creating the Ticket</span>
+            </div>
 
         <div class="creator--scale-div">
           <p>On a scale of 1-5 stressed Psyducks, how urgent is it?</p>
-                 <div class="urgency-scale-input">
-                  <!-- In order to make the psyducks transparents I'm using a class called opacity-filter -->
-           <input type="radio" id="psy-1" name="stressed-psy-scale" value="1">
-           <label for="psy-1"><img class="opacity-filter" src="./assets/image/Psyduck.png"></label>
-           <input type="radio" id="psy-2" name="stressed-psy-scale" value="2">
-           <label for="psy-2"><img class="opacity-filter" src="./assets/image/Psyduck.png"></label>
-           <input type="radio" id="psy-3" name="stressed-psy-scale" value="3">
-           <label for="psy-3"><img class="opacity-filter" src="./assets/image/Psyduck.png"></label>
-           <input type="radio" id="psy-4" name="stressed-psy-scale" value="4">
-           <label for="psy-4"><img class="opacity-filter" src="./assets/image/Psyduck.png"></label>
-           <input type="radio" id="psy-5" name="stressed-psy-scale" value="5">
-           <label for="psy-5"><img class="opacity-filter" src="./assets/image/Psyduck.png"></label>
-                 </div>
+          <div class="urgency-scale-input">
+            <!-- In order to make the psyducks transparents I'm using a class called opacity-filter -->
+            <input
+              type="radio"
+              id="psy-1"
+              name="stressed-psy-scale"
+              value="1"
+            />
+            <label for="psy-1"
+              ><img class="opacity-filter" src="./assets/image/Psyduck.png"
+            /></label>
+            <input
+              type="radio"
+              id="psy-2"
+              name="stressed-psy-scale"
+              value="2"
+            />
+            <label for="psy-2"
+              ><img class="opacity-filter" src="./assets/image/Psyduck.png"
+            /></label>
+            <input
+              type="radio"
+              id="psy-3"
+              name="stressed-psy-scale"
+              value="3"
+            />
+            <label for="psy-3"
+              ><img class="opacity-filter" src="./assets/image/Psyduck.png"
+            /></label>
+            <input
+              type="radio"
+              id="psy-4"
+              name="stressed-psy-scale"
+              value="4"
+            />
+            <label for="psy-4"
+              ><img class="opacity-filter" src="./assets/image/Psyduck.png"
+            /></label>
+            <input
+              type="radio"
+              id="psy-5"
+              name="stressed-psy-scale"
+              value="5"
+            />
+            <label for="psy-5"
+              ><img class="opacity-filter" src="./assets/image/Psyduck.png"
+            /></label>
+          </div>
         </div>
 
-         <button id="previewBtn">Create Ticket</button>
-
+        <button id="previewBtn">Create Ticket</button>
       </form>
       <!-- This box stays hidden with the class no-show -->
       <div class="preview-box no-show">
         <div class="ticket-preview">
           <div class="task-header">
-              <p class="decoration">ººº</p>
-              <h2 class="ticket-logo">To-do</h2>
-              <p class="decoration">ººº</p>
-            </div>
-            <h2 class="task-text">Task</h2>
-            <hr>
-            <div class="psyduck-urgency-scale">
-              <img src="./assets/image/Psyduck-fundo-branco.png">
-
-            </div>
+            <p class="decoration">ººº</p>
+            <h2 class="ticket-logo">To-do</h2>
+            <p class="decoration">ººº</p>
           </div>
-          
-          <button id="printBtn">Print</button>
+          <h2 class="task-text">Task</h2>
+          <hr />
+          <div class="psyduck-urgency-scale">
+            <img src="./assets/image/Psyduck-fundo-branco.png" />
+          </div>
         </div>
-      </section>
-      
-    </body>
-    </html>
-    
+
+        <button id="printBtn">Print</button>
+      </div>
+    </section>
+  </body>
+</html>

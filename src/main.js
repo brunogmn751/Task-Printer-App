@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron/main");
 const path = require("node:path");
 const fs = require("fs");
+const {printTicket} = require("./print.js");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -46,5 +47,17 @@ const decodedImage = image.replace(/^data:image\/png;base64,/, "");
 const imagePath = getTicketPath();
 fs.writeFileSync(imagePath, decodedImage, "base64");
 
+
 return imagePath;
 });
+
+ipcMain.handle("printTicket", async ()=>{
+    const imagePath = getTicketPath();
+    try{
+        await printTicket(imagePath);
+        return{ok:true};
+    }catch(error){
+console.error("Failed to print:", error);
+    return { ok: false, error: error.message };
+    }
+})

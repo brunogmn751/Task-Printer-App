@@ -88,5 +88,9 @@ printBtn.addEventListener("click", async () => {
   const canvas = await html2canvas(newTicket, {scale:2});
   const imageTxt = canvas.toDataURL("image/png");
   const savedPath = await electronFunctions.saveImage(imageTxt);
-  console.log(savedPath);
+  const result = await electronFunctions.printTicket(savedPath);
+
+  if(!result){
+    alert(`Couldn't print: ${result.error}`)
+  }
 });

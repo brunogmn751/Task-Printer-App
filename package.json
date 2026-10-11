@@ -14,7 +14,13 @@
   "author": "Bruno Azevedo",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^44.7.0",
-    "html2canvas": "^1.4.1"
+    "electron": "^44.7.0"
+  },
+  "dependencies": {
+    "@node-escpos/core": "^0.6.0",
+    "@node-escpos/usb-adapter": "^0.3.1",
+    "html2canvas": "^1.4.1",
+    "jimp": "^1.6.1",
+    "usb": "^2.19.1"
   }
 }

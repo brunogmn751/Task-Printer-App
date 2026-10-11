@@ -14,6 +14,7 @@
   "author": "Bruno Azevedo",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^44.7.0"
+    "electron": "^44.7.0",
+    "html2canvas": "^1.4.1"
   }
 }

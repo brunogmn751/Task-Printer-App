@@ -1,3 +1,5 @@
+// const { default: html2canvas } = require("html2canvas");
+
 const printBtn = document.getElementById("printBtn");
 const taskInput = document.querySelector("#task-input");
 const psyduckScale = document.querySelectorAll(
@@ -79,4 +81,12 @@ previewBtn.addEventListener("click", (event) => {
   } else {
     errorMsg.classList.remove("full-opacity");
   }
+});
+
+printBtn.addEventListener("click", async () => {
+  const newTicket = document.querySelector(".ticket-preview");
+  const canvas = await html2canvas(newTicket, {scale:2});
+  const imageTxt = canvas.toDataURL("image/png");
+  const savedPath = await electronFunctions.saveImage(imageTxt);
+  console.log(savedPath);
 });

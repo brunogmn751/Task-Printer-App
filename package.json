@@ -4,7 +4,10 @@
   "description": "An app for printing tasks on a thermal receipt printer via USB",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "forge-start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "keywords": [
     "printer",
@@ -14,11 +17,15 @@
   "author": "Bruno Azevedo",
   "license": "ISC",
   "devDependencies": {
+    "@electron-forge/cli": "^8.0.1",
+    "@electron-forge/maker-rpm": "^8.0.1",
+    "@electron-forge/maker-squirrel": "^8.0.1",
     "electron": "^44.7.0"
   },
   "dependencies": {
     "@node-escpos/core": "^0.6.0",
     "@node-escpos/usb-adapter": "^0.3.1",
+    "electron-squirrel-startup": "^1.0.1",
     "html2canvas": "^1.4.1",
     "jimp": "^1.6.1",
     "usb": "^2.19.1"

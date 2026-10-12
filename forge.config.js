@@ -5,7 +5,7 @@ module.exports = {
     asar: true,
     name: "Task Printer",
     executableName: "task-printer-app",
-    icon: path.resolve(__dirname, "src/assets/Psy-icon"),
+    icon: path.resolve(__dirname, "src/assets//image/Psy-icon"),
   },
   makers: [
     {
@@ -18,7 +18,9 @@ module.exports = {
     },
     {
       name: "@electron-forge/maker-squirrel",
-      config: { name: "task_printer" },
+      config: { name: "task_printer",
+        setupIcon: path.resolve(__dirname, "src/assets/image/Psy-icon.ico"),
+       },
     },
   ],
 };

@@ -3,7 +3,11 @@ const path = require("node:path");
 const fs = require("fs");
 const {printTicket} = require("./print.js");
 
+if (require("electron-squirrel-startup")) app.quit();
+
 function createWindow() {
+ const iconFile = process.platform === "win32" ? "Psy-icon.ico" : "Psyduck.png";
+ 
   const win = new BrowserWindow({
     width: 520,
     minWidth: 520,
@@ -14,12 +18,12 @@ function createWindow() {
     },
     title: "Task Printer",
     backgroundColor: "#DCCCAC",
-    icon: path.join(__dirname, "assets", "Image", "Psy-icon.ico"),
+    icon: path.join(__dirname, "assets", "image", iconFile),
   });
 
   win.loadFile(path.join(__dirname, "index.html"));
 
-//   win.removeMenu();
+  win.removeMenu();
 }
 
 app.whenReady().then(() => {

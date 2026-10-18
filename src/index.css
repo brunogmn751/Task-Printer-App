@@ -22,6 +22,10 @@ html {
   font-size: 62.5%;
 }
 
+img {
+  -webkit-user-drag: none;
+}
+
 body {
   display: flex;
   flex-flow: column;
@@ -35,21 +39,26 @@ body {
 
   &.open-popup {
     & .settings-popup {
-      display: flex;
+      opacity: 1;
+      visibility: visible;
     }
   }
 }
 
 .settings-popup {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.524);
   position: fixed;
-  height: 200%;
+  height: 100%;
+  inset: 0;
   width: 100%;
   backdrop-filter: blur(5px);
   z-index: 10;
+  transition: all ease-in 0.2s;
 
   & .settings-container {
     display: flex;
@@ -89,18 +98,20 @@ body {
         justify-content: space-between;
         text-align: center;
         align-items: center;
-
+        
         & .input-radio {
           display: none;
         }
-
+        
         & label {
           border: solid 1px var(--amarelo-medio);
-          padding: 0.5rem;
+          padding: 0.8rem;
           border-radius: 1rem;
+          transition: all ease-in 0.1s;
         }
 
         & input:checked + label {
+          padding: .5rem;
           border: solid 4px var(--amarelo-medio);
         }
       }
@@ -149,20 +160,19 @@ body {
 }
 
 .settings-btn {
-  padding: 0.75rem;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: var(--amarelo-medio);
-  border-radius: 10px;
-  border: solid 1px rgba(89, 72, 34, 0.85);
+  border-radius: 5px;
   transition: all ease-in 0.2s;
+  background-color: var(--amarelo-medio);
 
   & .settings-btn-img {
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
     fill: rgba(89, 72, 34, 0.85);
     transition: all ease-in 0.2s;
   }

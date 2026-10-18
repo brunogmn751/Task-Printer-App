@@ -11,6 +11,9 @@ const previewBox = document.querySelector(".preview-box");
 const taskText = document.querySelector(".task-text");
 const taskScaleDiv = document.querySelector(".psyduck-urgency-scale");
 const errorMsg = document.querySelector("#error");
+const openSettingsBtn = document.querySelector(".settings-btn")
+const exitSettingsBtn = document.querySelector(".settings-form-cancel")
+const settingsPopup = document.querySelector(".settings-popup");
 
 taskInput.setAttribute("size", taskInput.getAttribute("placeholder").length);
 
@@ -85,7 +88,7 @@ previewBtn.addEventListener("click", (event) => {
 
 printBtn.addEventListener("click", async () => {
   const newTicket = document.querySelector(".ticket-preview");
-  const canvas = await html2canvas(newTicket, {scale:2});
+  const canvas = await html2canvas(newTicket, {scale:3});
   const imageTxt = canvas.toDataURL("image/png");
   const savedPath = await electronFunctions.saveImage(imageTxt);
   const result = await electronFunctions.printTicket(savedPath);
@@ -94,3 +97,17 @@ printBtn.addEventListener("click", async () => {
     alert(`Couldn't print: ${result.error}`)
   }
 });
+
+openSettingsBtn.addEventListener("click", ()=>{
+  document.body.classList.add("open-popup");
+})
+
+exitSettingsBtn.addEventListener("click", ()=>{
+  document.body.classList.remove("open-popup");
+})
+
+settingsPopup.addEventListener("click", (e)=>{
+  if(e.target === settingsPopup){
+    document.body.classList.remove("open-popup");
+  }
+})

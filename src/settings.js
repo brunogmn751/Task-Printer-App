@@ -46,4 +46,4 @@ async function save(settings) {
   await fs.writeFile(file, JSON.stringify(settings, null, 2));
 }
 
-module.exports = { load, save, validate, defaults };
+module.exports = { load, save, validate, defaults, settingsPath };

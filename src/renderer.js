@@ -125,7 +125,7 @@ settingsForm.addEventListener("submit",async (e)=>{
   const newSettings = {
     vid: vidInput.value,
     pid: pidInput.value,
-    printerSize: radioChecked.value
+    printerWidth: radioChecked.value
   };
 
   const result = await electronFunctions.saveSettings(newSettings);

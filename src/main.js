@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require("electron/main");
 const path = require("node:path");
 const fs = require("fs");
 const {printTicket} = require("./print.js");
+const { load, save, validate, defaults, settingsPath } = require("./settings.js")
 
 if (require("electron-squirrel-startup")) app.quit();
 
@@ -55,6 +56,15 @@ fs.writeFileSync(imagePath, decodedImage, "base64");
 return imagePath;
 });
 
+ipcMain.handle("get-settings", () => load());
+
+ipcMain.handle("saveSettings", async (event, settings)=>{
+  const result = validate(settings);
+  if (!result.ok) return result;
+  await save(result.value);
+  return { ok: true };
+})
+
 ipcMain.handle("printTicket", async ()=>{
     const imagePath = getTicketPath();
     try{
@@ -66,7 +76,5 @@ console.error("Failed to print:", error);
     }
 })
 
-ipcMain.handle("saveSettings", (event, settings)=>{
-  console.log("Received"+settings);
-  return{ok:true}
-})
+
+

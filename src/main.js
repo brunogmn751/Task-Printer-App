@@ -23,7 +23,7 @@ function createWindow() {
 
   win.loadFile(path.join(__dirname, "index.html"));
 
-  win.removeMenu();
+  // win.removeMenu();
 }
 
 app.whenReady().then(() => {
@@ -64,4 +64,9 @@ ipcMain.handle("printTicket", async ()=>{
 console.error("Failed to print:", error);
     return { ok: false, error: error.message };
     }
+})
+
+ipcMain.handle("saveSettings", (event, settings)=>{
+  console.log("Received"+settings);
+  return{ok:true}
 })

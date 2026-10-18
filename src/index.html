@@ -14,26 +14,61 @@
   <body>
     <div class="settings-popup">
       <div class="settings-container">
-                <h2 class="settings-title">Settings<h2>
-          <form class="settings-form">
-            <label class="settings-label" for="vid-input">Vendor's ID (VID)</label>
-            <input class="settings-input" id="vid-input" type="text" placeholder="0x28e9..." required/>
-            <label class="settings-label" for="pid-input">Product's ID (PID)</label>
-            <input class="settings-input" id="pid-input" type="text" placeholder="0x28e9..." required/>
-            <div class="radio-container">
-              <input class="input-radio" id="58mm" type="radio" name="printer-size" value="384" checked/>
-              <label for="58mm">58mm</label>
-              <input class="input-radio" id="80mm" type="radio" name="printer-size" value="576"/>
-              <label for="80mm">80mm</label>
-              <input class="input-radio" id="100mm" type="radio" name="printer-size" value="832"/>
-              <label for="100mm">100mm</label>
-            </div>
-            <div class="btns-div">
-              <button class="settings-form-save">Save</button>
-              <button class="settings-form-cancel">Cancel</button>
-            </div>
-        </div>
+        <h2 class="settings-title">Settings</h2>
+        <form class="settings-form">
+          <label class="settings-label" for="vid-input"
+            >Vendor's ID (VID)</label
+          >
+          <input
+            class="settings-input"
+            id="vid-input"
+            type="text"
+            placeholder="0x28e9..."
+            required
+          />
+          <label class="settings-label" for="pid-input"
+            >Product's ID (PID)</label
+          >
+          <input
+            class="settings-input"
+            id="pid-input"
+            type="text"
+            placeholder="0x28e9..."
+            required
+          />
+          <div class="radio-container">
+            <input
+              class="input-radio"
+              id="58mm"
+              type="radio"
+              name="printer-size"
+              value="384"
+              checked
+            />
+            <label for="58mm">58mm</label>
+            <input
+              class="input-radio"
+              id="80mm"
+              type="radio"
+              name="printer-size"
+              value="576"
+            />
+            <label for="80mm">80mm</label>
+            <input
+              class="input-radio"
+              id="100mm"
+              type="radio"
+              name="printer-size"
+              value="832"
+            />
+            <label for="100mm">100mm</label>
+          </div>
+          <div class="btns-div">
+            <button class="settings-form-save" type="submit">Save</button>
+            <button class="settings-form-cancel" type="button">Cancel</button>
+          </div>
         </form>
+      </div>
     </div>
     <button class="settings-btn">
       <svg

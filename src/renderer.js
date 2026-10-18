@@ -15,6 +15,12 @@ const openSettingsBtn = document.querySelector(".settings-btn")
 const exitSettingsBtn = document.querySelector(".settings-form-cancel")
 const settingsPopup = document.querySelector(".settings-popup");
 
+const settingsForm = document.querySelector(".settings-form");
+const vidInput = document.querySelector("#vid-input");
+const pidInput = document.querySelector("#pid-input");
+
+
+
 taskInput.setAttribute("size", taskInput.getAttribute("placeholder").length);
 
 psyduckScale.forEach((input) => {
@@ -23,7 +29,7 @@ psyduckScale.forEach((input) => {
       "input[name='stressed-psy-scale']:checked",
     );
     let currentValue = Number(psyduckScaleChecked.value) - 1;
-
+    
     psyduckImgList.forEach((img, index) => {
       if (index <= currentValue) {
         img.classList.remove("opacity-filter");
@@ -35,30 +41,30 @@ psyduckScale.forEach((input) => {
 });
 
 function createTicket() {
-  const frm = document.querySelector("form");
+  const frm = document.querySelector("#creator--form");
   const textInputContent = taskInput.value;
   const psyduckScaleChecked = document.querySelector(
     "input[name='stressed-psy-scale']:checked",
   );
   let psyduckNumber;
-
+  
   if (!psyduckScaleChecked) {
     psyduckNumber = 1;
   } else {
     psyduckNumber = psyduckScaleChecked.value;
   }
-
+  
   taskText.textContent = textInputContent;
   requestAnimationFrame(() => {
     let fontSize = 48;
-
+    
     while (fontSize > 12) {
       taskText.style.fontSize = `${fontSize}px`;
-
+      
       if (taskText.scrollWidth <= 384) {
         break;
       }
-
+      
       fontSize -= 2;
     }
   });
@@ -68,7 +74,7 @@ function createTicket() {
     psyduckImg.src = "./assets/image/Psyduck.png";
     taskScaleDiv.appendChild(psyduckImg);
   }
-
+  
   frm.reset();
   psyduckImgList.forEach((img) => {
     img.classList.add("opacity-filter");
@@ -92,8 +98,8 @@ printBtn.addEventListener("click", async () => {
   const imageTxt = canvas.toDataURL("image/png");
   const savedPath = await electronFunctions.saveImage(imageTxt);
   const result = await electronFunctions.printTicket(savedPath);
-
-  if(!result){
+  
+  if(!result.ok){
     alert(`Couldn't print: ${result.error}`)
   }
 });
@@ -110,4 +116,17 @@ settingsPopup.addEventListener("click", (e)=>{
   if(e.target === settingsPopup){
     document.body.classList.remove("open-popup");
   }
+})
+
+settingsForm.addEventListener("submit",async (e)=>{
+  e.preventDefault();
+  const radioChecked = document.querySelector("input[name='printer-size']:checked");
+  
+  const newSettings = {
+    vid: vidInput.value,
+    pid: pidInput.value,
+    printerSize: radioChecked.value
+  };
+
+  const result = await electronFunctions.saveSettings(newSettings);
 })

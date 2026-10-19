@@ -9,15 +9,14 @@ const previewBox = document.querySelector(".preview-box");
 const taskText = document.querySelector(".task-text");
 const taskScaleDiv = document.querySelector(".psyduck-urgency-scale");
 const errorMsg = document.querySelector("#error");
-const openSettingsBtn = document.querySelector(".settings-btn")
-const exitSettingsBtn = document.querySelector(".settings-form-cancel")
+const openSettingsBtn = document.querySelector(".settings-btn");
+const exitSettingsBtn = document.querySelector(".settings-form-cancel");
 const settingsPopup = document.querySelector(".settings-popup");
 
 const settingsForm = document.querySelector(".settings-form");
 const vidInput = document.querySelector("#vid-input");
 const pidInput = document.querySelector("#pid-input");
-
-
+const settingsError = document.querySelector("#settings-error");
 
 taskInput.setAttribute("size", taskInput.getAttribute("placeholder").length);
 
@@ -27,7 +26,7 @@ psyduckScale.forEach((input) => {
       "input[name='stressed-psy-scale']:checked",
     );
     let currentValue = Number(psyduckScaleChecked.value) - 1;
-    
+
     psyduckImgList.forEach((img, index) => {
       if (index <= currentValue) {
         img.classList.remove("opacity-filter");
@@ -45,24 +44,24 @@ function createTicket() {
     "input[name='stressed-psy-scale']:checked",
   );
   let psyduckNumber;
-  
+
   if (!psyduckScaleChecked) {
     psyduckNumber = 1;
   } else {
     psyduckNumber = psyduckScaleChecked.value;
   }
-  
+
   taskText.textContent = textInputContent;
   requestAnimationFrame(() => {
     let fontSize = 48;
-    
+
     while (fontSize > 12) {
       taskText.style.fontSize = `${fontSize}px`;
-      
+
       if (taskText.scrollWidth <= 384) {
         break;
       }
-      
+
       fontSize -= 2;
     }
   });
@@ -72,7 +71,7 @@ function createTicket() {
     psyduckImg.src = "./assets/image/Psyduck.png";
     taskScaleDiv.appendChild(psyduckImg);
   }
-  
+
   frm.reset();
   psyduckImgList.forEach((img) => {
     img.classList.add("opacity-filter");
@@ -92,50 +91,62 @@ previewBtn.addEventListener("click", (event) => {
 
 printBtn.addEventListener("click", async () => {
   const newTicket = document.querySelector(".ticket-preview");
-  const canvas = await html2canvas(newTicket, {scale:3});
+  const canvas = await html2canvas(newTicket, { scale: 3 });
   const imageTxt = canvas.toDataURL("image/png");
   const savedPath = await electronFunctions.saveImage(imageTxt);
   const result = await electronFunctions.printTicket(savedPath);
-  
-  if(!result.ok){
-    alert(`Couldn't print: ${result.error}`)
+
+  if (!result.ok) {
+    alert(`Couldn't print: ${result.error}`);
   }
 });
 
-openSettingsBtn.addEventListener("click", async ()=>{
+openSettingsBtn.addEventListener("click", async () => {
   const config = await electronFunctions.getSettings();
   vidInput.value = config.vid;
   pidInput.value = config.pid;
-  const radioInputs= document.querySelectorAll(".input-radio");
+  const radioInputs = document.querySelectorAll(".input-radio");
 
-  for(let i = 0; i < radioInputs.length; i++){
-    if(Number(radioInputs[i].value) === config.printerWidth){
-      console.log(radioInputs[i])
+  for (let i = 0; i < radioInputs.length; i++) {
+    if (Number(radioInputs[i].value) === config.printerWidth) {
+      console.log(radioInputs[i]);
       radioInputs[i].checked = true;
     }
   }
+
+  settingsError.textContent="";
+  
   document.body.classList.add("open-popup");
-})
+});
 
-exitSettingsBtn.addEventListener("click", ()=>{
+exitSettingsBtn.addEventListener("click", () => {
   document.body.classList.remove("open-popup");
-})
+});
 
-settingsPopup.addEventListener("click", (e)=>{
-  if(e.target === settingsPopup){
+settingsPopup.addEventListener("click", (e) => {
+  if (e.target === settingsPopup) {
     document.body.classList.remove("open-popup");
   }
-})
+});
 
-settingsForm.addEventListener("submit",async (e)=>{
+settingsForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const radioChecked = document.querySelector("input[name='printer-size']:checked");
-  
+
+  const radioChecked = document.querySelector(
+    "input[name='printer-size']:checked",
+  );
+
   const newSettings = {
     vid: vidInput.value,
     pid: pidInput.value,
-    printerWidth: radioChecked.value
+    printerWidth: radioChecked.value,
   };
 
   const result = await electronFunctions.saveSettings(newSettings);
-})
+  if(result.error){
+    settingsError.textContent = result.error;
+  }else{
+    settingsError.textContent="";
+  }
+});
+

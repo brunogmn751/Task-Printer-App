@@ -81,7 +81,7 @@ function printTicket(imagePath, vid, pid, printerWidth) {
       const productId = parseInt(pid, 16);
       device = new USB(vendorId, productId);
     } catch (error) {
-      return reject(new Error(`Couldn't find printer: ${error.message}`));
+      return reject(new Error(`${error.message}`));
     }
 
     device.open(async (error) => {

@@ -73,7 +73,7 @@ body {
     box-shadow: 0 0 4rem 2rem rgba(0, 0, 0, 0.2);
     position: relative;
     max-width: 60rem;
-    gap: 2rem;
+    gap: 1.5rem;
 
     & .settings-title {
       font-size: 2rem;
@@ -86,15 +86,25 @@ body {
       justify-content: center;
       align-items: center;
       gap: 2rem;
+      max-width: 75%;
 
       & .settings-label{
         font-size: 1.6rem;
+        font-weight: 700;
       }
 
       & .settings-input {
         padding: 0.5rem;
         font-family: Pixel;
         border-radius: 1rem;
+      }
+
+      & .settings-error-msg{
+        font-weight: 700;
+        font-size: 1rem;
+        line-height: 1.5;
+        text-align: center;
+        margin: -1rem 0;
       }
 
       & .radio-container {
@@ -265,7 +275,7 @@ body {
       & p {
         font-family: pixel;
         text-align: center;
-        line-height: 1.5;
+        line-height: 1.8;
         word-spacing: -0.3rem;
       }
 

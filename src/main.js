@@ -21,8 +21,8 @@ function createWindow() {
     minWidth: 520,
     height: 520,
     minHeight: 520,
-    // maxHeight:520,
-    // maxWidth:520,
+    maxHeight:520,
+    maxWidth:520,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },

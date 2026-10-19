@@ -27,45 +27,46 @@
             required
           />
           <label class="settings-label" for="pid-input"
-            >Product's ID (PID)</label
+          >Product's ID (PID)</label
           >
           <input
-            class="settings-input"
-            id="pid-input"
-            type="text"
-            placeholder="0x28e9..."
-            required
+          class="settings-input"
+          id="pid-input"
+          type="text"
+          placeholder="0x28e9..."
+          required
           />
           <div class="radio-container">
             <input
-              class="input-radio"
-              id="58mm"
-              type="radio"
-              name="printer-size"
-              value="384"
-              checked
+            class="input-radio"
+            id="58mm"
+            type="radio"
+            name="printer-size"
+            value="384"
+            checked
             />
             <label for="58mm">58mm</label>
             <input
-              class="input-radio"
-              id="80mm"
-              type="radio"
-              name="printer-size"
-              value="576"
+            class="input-radio"
+            id="80mm"
+            type="radio"
+            name="printer-size"
+            value="576"
             />
             <label for="80mm">80mm</label>
             <input
-              class="input-radio"
-              id="100mm"
-              type="radio"
-              name="printer-size"
-              value="832"
+            class="input-radio"
+            id="100mm"
+            type="radio"
+            name="printer-size"
+            value="832"
             />
             <label for="100mm">100mm</label>
           </div>
+          <span id="settings-error" class="settings-error-msg"></span>
           <div class="btns-div">
             <button class="settings-form-save" type="submit">Save</button>
-            <button class="settings-form-cancel" type="button">Cancel</button>
+            <button class="settings-form-cancel" type="button">Close</button>
           </div>
         </form>
       </div>
@@ -138,7 +139,7 @@
         </div>
 
         <div class="creator--scale-div">
-          <p>On a scale of 1-5 stressed Psyducks, how urgent is it?</p>
+          <p>On a scale of 1-5 stressed Psyducks,<br>how urgent is it?</p>
           <div class="urgency-scale-input">
             <!-- In order to make the psyducks transparents I'm using a class called opacity-filter -->
             <input

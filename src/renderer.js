@@ -1,5 +1,3 @@
-// const { default: html2canvas } = require("html2canvas");
-
 const printBtn = document.getElementById("printBtn");
 const taskInput = document.querySelector("#task-input");
 const psyduckScale = document.querySelectorAll(
@@ -104,7 +102,18 @@ printBtn.addEventListener("click", async () => {
   }
 });
 
-openSettingsBtn.addEventListener("click", ()=>{
+openSettingsBtn.addEventListener("click", async ()=>{
+  const config = await electronFunctions.getSettings();
+  vidInput.value = config.vid;
+  pidInput.value = config.pid;
+  const radioInputs= document.querySelectorAll(".input-radio");
+
+  for(let i = 0; i < radioInputs.length; i++){
+    if(Number(radioInputs[i].value) === config.printerWidth){
+      console.log(radioInputs[i])
+      radioInputs[i].checked = true;
+    }
+  }
   document.body.classList.add("open-popup");
 })
 

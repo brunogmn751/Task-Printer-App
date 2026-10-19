@@ -5,6 +5,7 @@ const path = require("path");
 const os = require("os");
 const fs = require("fs");
 
+// Former defaults
 // const PRINTER_VID = 0x28e9;
 // const PRINTER_PID = 0x0289;
 // const printerWidth = 384;

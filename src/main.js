@@ -21,6 +21,8 @@ function createWindow() {
     minWidth: 520,
     height: 520,
     minHeight: 520,
+    // maxHeight:520,
+    // maxWidth:520,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -31,13 +33,11 @@ function createWindow() {
 
   win.loadFile(path.join(__dirname, "index.html"));
 
-  // win.removeMenu();
+  win.removeMenu();
 }
 
 app.whenReady().then(async () => {
   createWindow();
-  const config = await load();
-  console.log(config);
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -64,7 +64,7 @@ ipcMain.handle("saveImage", (event, image) => {
   return imagePath;
 });
 
-ipcMain.handle("get-settings", () => load());
+ipcMain.handle("getSettings", () => load());
 
 ipcMain.handle("saveSettings", async (event, settings) => {
   const result = validate(settings);

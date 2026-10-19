@@ -73,6 +73,7 @@ body {
     box-shadow: 0 0 4rem 2rem rgba(0, 0, 0, 0.2);
     position: relative;
     max-width: 60rem;
+    gap: 2rem;
 
     & .settings-title {
       font-size: 2rem;
@@ -85,6 +86,10 @@ body {
       justify-content: center;
       align-items: center;
       gap: 2rem;
+
+      & .settings-label{
+        font-size: 1.6rem;
+      }
 
       & .settings-input {
         padding: 0.5rem;
@@ -108,6 +113,7 @@ body {
           padding: 0.8rem;
           border-radius: 1rem;
           transition: all ease-in 0.1s;
+          font-size: 1.4rem;
         }
 
         & input:checked + label {

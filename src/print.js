@@ -5,12 +5,12 @@ const path = require("path");
 const os = require("os");
 const fs = require("fs");
 
-const PRINTER_VID = 0x28e9;
-const PRINTER_PID = 0x0289;
-const printerWidth = 384;
+// const PRINTER_VID = 0x28e9;
+// const PRINTER_PID = 0x0289;
+// const printerWidth = 384;
 const paperFeedMargin = 60;
 
-async function prepareImage(imagePath) {
+async function prepareImage(imagePath, printerWidth) {
   let img = await Jimp.read(imagePath);
 
   img.greyscale();
@@ -72,11 +72,13 @@ function ditherFloydSteinberg(img) {
   }
 }
 
-function printTicket(imagePath) {
+function printTicket(imagePath, vid, pid, printerWidth) {
   return new Promise((resolve, reject) => {
     let device;
     try {
-      device = new USB(PRINTER_VID, PRINTER_PID);
+      const vendorId = parseInt(vid, 16);
+      const productId = parseInt(pid, 16);
+      device = new USB(vendorId, productId);
     } catch (error) {
       return reject(new Error(`Couldn't find printer: ${error.message}`));
     }
@@ -88,7 +90,7 @@ function printTicket(imagePath) {
 
       let tmpPath;
       try {
-        tmpPath = await prepareImage(imagePath);
+        tmpPath = await prepareImage(imagePath, printerWidth);
 
         const printer = new Printer(device, { encoding: "GB18030" });
         const image = await Image.load(tmpPath);

@@ -84,6 +84,7 @@ previewBtn.addEventListener("click", (event) => {
   if (taskInput.value) {
     errorMsg.classList.add("full-opacity");
     createTicket();
+    window.scroll(0, 520);
   } else {
     errorMsg.classList.remove("full-opacity");
   }

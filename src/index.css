@@ -3,6 +3,8 @@
   --amarelo-medio: #dcccac;
   --laranja-medio: #d97a2b;
   --vermelho-escuro: #c44a3a;
+
+  scroll-behavior: smooth;
 }
 
 @font-face {

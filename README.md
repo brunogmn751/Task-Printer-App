@@ -15,7 +15,6 @@ Works even better with a cork bulletin board.
 
 ## How it works
 <p align="center">
-  <img src="./docs/images/settings.png" alt="Settings window" height="400">
   <img src="./docs/images/preview.png" alt="Preview of the ticket before printing" height="400">
 </p>
 
@@ -34,6 +33,10 @@ Download the latest installer from the [Releases](../../releases) page.
 - **Windows:** run the `.exe` installer.
 
 ## Printer setup
+
+<p align="center">
+  <img src="./docs/images/settings.png" alt="Settings window" height="400">
+</p>
 
 To use this app you first need to find your printer's VID and PID values. 
 

@@ -1,6 +1,6 @@
 {
   "name": "task-printer-app",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An app for printing tasks on a thermal receipt printer via USB",
   "main": "src/main.js",
   "scripts": {

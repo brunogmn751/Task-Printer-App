@@ -1,27 +1,30 @@
 # Task Printer
 
-Some people work better when they can seey the tasks they have for the day ahead of them, I am one of these people. This program was made aiming to turn taks into something physical that can be pinned to a board reminding you of errands you need to run.
+Some people work best when they can see the tasks they have for the day ahead of them, I am one of those people. This program was made aiming to turn tasks into something physical that can be pinned to a board reminding you of errands you need to run.
 
 <p align="center">
   <img src="./docs/images/printer.png" alt="Task Printer printing a ticket" width="400">
-  <img src="./docs/images/app.png" alt="Task Printer printing a ticket" width="400">
+  <img src="./docs/images/app.png" alt="Task Printer App open" width="400">
 </p>
 
 Type a task, pick how urgent it is on a "Stressed Psyduck Scale" and get a physical to-do ticket from a USB thermal printer.
-Works best with a cork bulletin board.
+Works even better with a cork bulletin board.
 <p align="center">
-  <img src="./docs/images/board.jpg" alt="Task Printer printing a ticket" width="800">
+  <img src="./docs/images/board.jpg" alt="Cork Bulletin Board full of little tasks" width="800">
 </p>
 
 ## How it works
 <p align="center">
-  <img src="./docs/images/preview.png" alt="Task Printer printing a ticket" width="400">
+  <img src="./docs/images/settings.png" alt="Settings window" height="400">
+  <img src="./docs/images/preview.png" alt="Preview of the ticket before printing" height="400">
 </p>
 
-1. The window builds the ticket preview and captures it as an image with `html2canvas`.
-2. The preload script exposes the encoded image.
-3. Through IPC, the main process decodes and saves the image to the computer.
-4. The image is converted to black and white using `jimp`, goes through dithering, and is sent to the printer over USB with ESC/POS commands.
+1. You setup your printer on a settings windows that accepts a PID, a VID and 3 size options for different printers
+2. The app validates and saves the IDs and size to a JSON and automatically displays the current config when you open the settings menu
+3. The window builds the ticket preview and captures it as an image with `html2canvas`.
+4. The preload script exposes the encoded image and the settings.
+5. Through IPC, the main process decodes and saves the image to the computer and uses the user settings to communicate with the printer.
+6. The image is converted to black and white using `jimp`, goes through dithering, and is sent to the printer over USB with ESC/POS commands.
 
 ## Install
 
@@ -32,16 +35,18 @@ Download the latest installer from the [Releases](../../releases) page.
 
 ## Printer setup
 
-The printer is currently identified by its USB vendor/product ID, hardcoded in `src/print.js`:
+To use this app you first need to find your printer's VID and PID values. 
 
 |                  | Value    |
 | ---------------- | -------- |
 | Vendor ID (VID)  | `0x28e9` |
 | Product ID (PID) | `0x0289` |
 
-So out of the box it only works with cheap chinese small printers. If your printer is a different model, find its IDs (see below) and change `PRINTER_VID`, `PRINTER_PID`, and `printerWidth` in `src/print.js`. A setting for this inside the app is on the roadmap.
+On Linux you can find these running `lsusb` which lists all your USB devices with the IDs, on my machine it shows up as:
 
-The app talks to the printer directly over USB, so the operating system has to let it do that. This is a one-time setup per computer.
+`Bus 003 Device 008: ID 28e9:0289 GDMicroelectronics YC Printer demo`
+
+On windows you can find these numbers on the `Device Manager`, right-clicking the printer and opening `Properties`
 
 
 ### Linux (udev rule)
@@ -54,13 +59,13 @@ By default a regular user can't open raw USB devices, so printing fails. A udev 
    lsusb
 ```
 
-2. Create `/etc/udev/rules.d/99-task-printer.rules` with the following content (replace the IDs if yours differ):
+2. Create `/etc/udev/rules.d/70-task-printer.rules` with the following content (replace the IDs if yours differ):
 
 ```
    SUBSYSTEM=="usb", ATTR{idVendor}=="28e9", ATTR{idProduct}=="0289", MODE="0666"
 ```
 
-`MODE="0666"` opens the printer to every user on the machine and works more consistently. Alternatively you can replace it with `TAG+="uaccess"` wich grants access only to whoever is logged in at the computer.
+`MODE="0666"` opens the printer to every user on the machine and works more consistently. Alternatively you can replace it with `TAG+="uaccess"` which grants access only to whoever is logged in at the computer.
 
 3. Reload the rules and reconnect the printer:
 
@@ -90,7 +95,3 @@ Windows usually binds thermal printers to a standard printing driver, which bloc
 
 Electron, Electron Forge, node-escpos, Jimp, html2canvas
 
-## Roadmap
-
-- [ ] Configurable printer VID/PID
-- [ ] Configurable ticket size for bigger printers
